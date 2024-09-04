@@ -1,0 +1,46 @@
+<div class="">
+  <div class="flex justify-end p-4 text-3xl">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="onCancel()">&times;</button>
+  </div>
+  <h1 class="text-3xl text-center">New Task</h1>
+  <div class="flex flex-col border-t-2 p-4 mx-auto">
+    <div class="flex flex-row gap-4">
+      <div class="my-2">
+        <label class="text-lg mr-4 text-gray-700">Assigned To</label>
+        <input type="text" [(ngModel)]="assignedTo"
+          class="border-2 border-gray-500 px-4 py-2 w-full focus:outline-none focus:border-blue-500" />
+      </div>
+      <div class="my-2">
+        <label class="text-lg mr-4 text-gray-700">Status</label>
+        <input type="text" [(ngModel)]="status"
+          class="border-2 border-gray-500 px-4 py-2 w-full focus:outline-none focus:border-blue-500" />
+      </div>
+    </div>
+    <div class="flex flex-row gap-4">
+      <div class="my-2">
+        <label class="text-lg mr-4 text-gray-700">Due Date</label>
+        <input type="text" [(ngModel)]="dueDate"
+          class="border-2 border-gray-500 px-4 py-2 w-full focus:outline-none focus:border-blue-500" />
+      </div>
+      <div class="my-2">
+        <label class="text-lg mr-4 text-gray-700">Priority</label>
+        <input type="text" [(ngModel)]="priority"
+          class="border-2 border-gray-500 px-4 py-2 w-full focus:outline-none focus:border-blue-500" />
+      </div>
+    </div>
+    <div class="my-2">
+      <label class="text-lg mr-4 text-gray-700">Description</label>
+      <input type="text" [(ngModel)]="description"
+        class="border-2 border-gray-500 px-4 py-2 w-full focus:outline-none focus:border-blue-500" />
+    </div>
+  </div>
+  <div class="flex justify-end gap-2 border-2 bg-gray-100 mt-4 py-4 px-2">
+    <button class="bg-gray-300 text-black rounded hover:bg-gray-400 focus:outline-none px-4 py-2" (click)="onCancel()">
+      Cancel
+    </button>
+    <button class="bg-indigo-600 text-white rounded hover:bg-blue-600 focus:outline-none px-4 py-2"
+      (click)="handleSaveTask()">
+      Save
+    </button>
+  </div>
+</div>

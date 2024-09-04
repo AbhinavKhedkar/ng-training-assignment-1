@@ -1,0 +1,122 @@
+<div class="p-4">
+  <div class="border-b-2 border-gray-300 py-2">
+    <div class="flex w-full sticky justify-between items-center">
+      <div class="p-8">
+        <mat-icon>task</mat-icon>
+        <i class="fas fa-tasks"></i>
+      </div>
+      <div class="flex w-full justify-between items-center px-8">
+        <div>
+          <h1>Task</h1>
+          <h3>All Tasks</h3>
+        </div>
+        <div class="gap-y-12">
+          <div class="flex w-full justify-between items-center">
+            <button (click)="openCreateTaskModal()"
+              class="border border-gray-700 bg-yellow-100 text-center px-8 py-2">New Task</button>
+            <button (click)="fetchTasks()"
+              class="border border-gray-700 bg-yellow-100 text-center px-8 py-2">Refresh</button>
+          </div>
+          <div class="border border-gray-700 text-center px-8 py-2">
+            <button>Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h6 class="px-8">4 records</h6>
+  </div>
+
+  <div class="flex justify-center items-center gap-x-4">
+    <ng-container *ngIf="loading">
+      <div class="w-full h-80vh flex justify-center items-center">
+        <div
+          class="flex justify-center items-center animate-ping w-16 h-16 rounded-full border-t-4 border-sky-600 border-solid m-auto">
+          <div class="w-12 h-12 bg-sky-600 rounded-full"></div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!loading && showType === 'table'">
+      <table class="w-full">
+        <thead>
+          <tr>
+            <th class="text-center border-b-2 p-2">No.</th>
+            <th class="text-center border-b-2 p-2">Assigned To</th>
+            <th class="text-center border-b-2 p-2">Status</th>
+            <th class="text-center border-b-2 p-2">Due Date</th>
+            <th class="text-center border-b-2 p-2">Priority</th>
+            <th class="text-center border-b-2 p-2">Comments</th>
+            <th class="text-center border-b-2 p-2">Operations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks; let i = index">
+            <td class="text-center border-b-2 p-2">{{ i + 1 }}</td>
+            <td class="text-center border-b-2 p-2">{{ task.assignedTo }}</td>
+            <td class="text-center border-b-2 p-2">{{ task.status }}</td>
+            <td class="text-center border-b-2 p-2">{{ task.dueDate }}</td>
+            <td class="text-center border-b-2 p-2">{{ task.priority }}</td>
+            <td class="text-center border-b-2 p-2">{{ task.description }}</td>
+            <td class="text-center border-b-2 p-2">
+              <button (click)="openEditTaskModal()"
+                class="border border-gray-700 bg-yellow-100 text-center px-8 py-2">Edit Task</button>
+              <button (click)="openDeleteTaskModal()"
+                class="border border-gray-700 bg-yellow-100 text-center px-8 py-2">Delete Task</button>
+            </td>
+            <!-- <td class="text-center border-b-2 p-2">
+              <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                class="bg-gray-100 hover:bg-gray-300 rounded-lg p-4 items-center" type="button"><svg
+                  class="w-2 h-2 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                  viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 4 4 4-4" />
+                </svg>
+              </button>
+              <div id="dropdown"
+                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                  <li>
+                    <button (click)="openEditTaskModal()"
+                      class="border border-gray-700 bg-yellow-100 text-center px-8 py-2">Edit Task</button>
+                  </li>
+                  <li>
+                    <button (click)="openDeleteTaskModal()"
+                      class="border border-gray-700 bg-yellow-100 text-center px-8 py-2">Delete Task</button>
+                  </li>
+                </ul>
+              </div>
+            </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </ng-container>
+  </div>
+
+  <div class="flex justify-between items-center border-t-2 border-b-2 border-gray-300 p-8">
+    <div class="flex flex-row justify-center items-center border border-gray-300 px-2 py-1 w-24">
+      <select [(ngModel)]="rowsPerPage" (change)="handleRowsPerPageChange($event)">
+        <option *ngFor="let size of [5, 10, 20, 50]" [value]="size">{{ size }}</option>
+      </select>
+    </div>
+    <div class="flex flex-row">
+      <button (click)="handleFirstPage()" [disabled]="currentPage === 1"
+        class="flex flex-row justify-center items-center border border-gray-300 px-2 py-1 w-24">
+        First
+      </button>
+      <button (click)="handlePreviousPage()" [disabled]="currentPage === 1"
+        class="flex flex-row justify-center items-center border border-gray-300 px-2 py-1 w-24">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+        Previous
+      </button>
+      <span class="flex justify-center items-center border border-gray-300 px-2 py-1 w-24">{{ currentPage }}</span>
+      <button (click)="handleNextPage()" [disabled]="currentPage === totalPages"
+        class="flex flex-row justify-center items-center border border-gray-300 px-2 py-1 w-24">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        Next
+      </button>
+      <button (click)="handleLastPage()" [disabled]="currentPage === totalPages"
+        class="flex flex-row justify-center items-center border border-gray-300 px-2 py-1 w-24">
+        Last
+      </button>
+    </div>
+  </div>
+</div>

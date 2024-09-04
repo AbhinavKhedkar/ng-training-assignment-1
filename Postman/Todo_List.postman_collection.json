@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "14afee29-20fa-4288-960b-f4dbadf53c48",
+		"name": "Todo_List",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31397764"
+	},
+	"item": [
+		{
+			"name": "Creating a Task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"assignedTo\": \"Abhay\",\r\n    \"status\": \"Finish\",\r\n    \"dueDate\": \"2024-09-04\",\r\n    \"priority\": \"Urgent\",\r\n    \"description\": \"Complete this task urgently as its important!!!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5555/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5555/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"assignedTo\": \"Abhinav Khedkar\",\r\n    \"status\": \"Started\",\r\n    \"dueDate\": \"2024-09-04\",\r\n    \"priority\": \"Urgent\",\r\n    \"description\": \"Complete this task urgently as its important!!!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5555/tasks/66d5960db10e35424cfa690f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"tasks",
+						"66d5960db10e35424cfa690f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5555/tasks/66d5960db10e35424cfa690f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5555",
+					"path": [
+						"tasks",
+						"66d5960db10e35424cfa690f"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
